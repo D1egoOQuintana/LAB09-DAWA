@@ -1,0 +1,25 @@
+# Dependencies
+node_modules
+
+# Build
+.next
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode
+.idea
+
+# Git
+.git
+.gitignore
+
+# Documentation (opcional, puedes comentar si quieres incluirlos)
+# PROYECTO.md
+# DEPLOYMENT.md
