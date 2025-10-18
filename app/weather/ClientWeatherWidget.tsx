@@ -1,19 +1,27 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import axios from 'axios'
 
+interface WeatherData {
+  current_weather: {
+    temperature: number
+    windspeed: number
+    weathercode: number
+  }
+}
+
 export default function ClientWeatherWidget() {
-  const [weather, setWeather] = useState<any>(null)
+  const [weather, setWeather] = useState<WeatherData | null>(null)
   const [loading, setLoading] = useState(true)
   const [city, setCity] = useState('Tokyo')
 
-  const cities = {
+  const cities = useMemo(() => ({
     Tokyo: { lat: 35.6762, lon: 139.6503 },
     'New York': { lat: 40.7128, lon: -74.0060 },
     London: { lat: 51.5074, lon: -0.1278 },
     Sydney: { lat: -33.8688, lon: 151.2093 }
-  }
+  }), [])
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -26,7 +34,7 @@ export default function ClientWeatherWidget() {
       setLoading(false)
     }
     fetchWeather()
-  }, [city])
+  }, [city, cities])
 
   return (
     <div className="bg-white/90 backdrop-blur rounded-2xl shadow-2xl p-6 border-4 border-white">
